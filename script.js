@@ -84,6 +84,7 @@ sendButton.addEventListener('click', function() {
 function activateCamera() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true, audio: { echoCancellation: true } }).then(function(stream) {
+            video.style.transform = 'rotateY(180deg)';
             video.srcObject = stream;
             video.play();
             video.style.display = 'block';
