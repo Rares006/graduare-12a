@@ -26,7 +26,7 @@ const previewImage = document.getElementById('previewImage');
 const previewVideo = document.getElementById('previewVideo');
 const info = document.getElementById('info');
 
-info.textContent = 'Fă o poză sau înregistrează un video care să rămână amintire a acestei ultime zile din viața de elev';
+info.textContent = 'Fă o poză sau înregistrează un video care să rămână ca amintire a acestei ultime zile din viața de elev';
 info.style.fontSize = '24px';
 info.style.marginTop = '20px';
 info.style.color = '#e4c4c7';
@@ -140,7 +140,6 @@ function startRecording() {
     }, 6000);
 }
 
-
 function takePicture() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
@@ -185,12 +184,20 @@ function uploadToS3(data, contentType) {
             console.error('Eroare la încărcarea fișierului: ', err);
         } else {
             console.log('Fișier încărcat cu succes: ', data.Location);
+
+            // Oprim camera după încărcare
+            if (video.srcObject) {
+                video.srcObject.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+                cameraDeschisa = false;
+            }
+
             // Ascunde elementele după încărcare
             repetatiButton.style.display = 'none';
             sendButton.style.display = 'none';
             previewImage.style.display = 'none';
             previewVideo.style.display = 'none';
-            info.textContent = 'Felicitari! Maine vei gasi pe acest cod QR un album cu pozele facute azi.';
+            info.textContent = 'Felicitări! Mâine vei găsi pe acest cod QR un album cu pozele făcute azi.';
             info.style.color = '#e4c4c7';
             info.style.display = 'block';
         }
