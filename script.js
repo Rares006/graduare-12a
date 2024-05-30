@@ -29,9 +29,9 @@ const info = document.getElementById('info');
 info.textContent = 'Fă o poză sau înregistrează un video care să rămână amintire a acestei ultime zile din viața de elev';
 info.style.fontSize = '24px';
 info.style.marginTop = '20px';
+info.style.color = '#e4c4c7';
 info.style.fontFamily = 'Times New Roman';
 info.style.fontWeight = 'bold';
-info.style.color = '#e4c4c7';
 info.style.display = 'block';
 
 // Adăugăm evenimentul click pentru capturarea pozei sau începerea înregistrării video
@@ -190,6 +190,7 @@ function uploadToS3(data, contentType) {
             previewImage.style.display = 'none';
             previewVideo.style.display = 'none';
             info.textContent = 'Felicitari! Maine vei gasi pe acest cod QR un album cu pozelefacute azi.';
+            info.style.color = '#e4c4c7';
             info.style.display = 'block';
         }
     });
