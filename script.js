@@ -31,6 +31,7 @@ info.style.fontSize = '24px';
 info.style.marginTop = '20px';
 info.style.fontFamily = 'Times New Roman';
 info.style.fontWeight = 'bold';
+info.style.color = '#e4c4c7';
 info.style.display = 'block';
 
 // Adăugăm evenimentul click pentru capturarea pozei sau începerea înregistrării video
