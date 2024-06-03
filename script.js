@@ -63,7 +63,9 @@ repetatiButton.addEventListener('click', function() {
     // Ascundem elementele nedorite
     video.style.display = 'none';
     previewImage.style.display = 'none';
+    previewImage.style.transform = 'rotateY(180deg)';
     previewVideo.style.display = 'none';
+    previewVideo.style.transform = 'rotateY(180deg)';
     sendButton.style.display = 'none';
     repetatiButton.style.display = 'none';
     stopRecordButton.style.display = 'none';
