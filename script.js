@@ -68,7 +68,7 @@ repetatiButton.addEventListener('click', function() {
     repetatiButton.style.display = 'none';
     stopRecordButton.style.display = 'none';
     captureButton.style.display = 'block';
-    recordButton.style.display = 'none';
+    recordButton.style.display = 'block';
 });
 
 // Adăugăm evenimentul click pentru trimiterea pozei sau a înregistrării video
@@ -76,10 +76,8 @@ sendButton.addEventListener('click', function() {
     if (previewImage.style.display === 'block') {
         const imageDataURL = canvas.toDataURL('image/png');
         uploadImage(imageDataURL);
-        previewImage.style.transform = 'rotateY(180deg)';
     } else if (previewVideo.style.display === 'block') {
         uploadVideo();
-        previewVideo.style.transform = 'rotateY(180deg)';
     }
 });
 
@@ -123,6 +121,7 @@ function startRecording() {
         stopRecordButton.style.display = 'none';
         info.style.display = 'none';
         previewVideo.style.display = 'block';
+        previewVideo.style.transform = 'rotateY(180deg)';
         sendButton.style.display = 'block';
         repetatiButton.style.display = 'block';
 
@@ -153,6 +152,7 @@ function takePicture() {
     info.style.display = 'none';
     previewImage.src = canvas.toDataURL('image/png');
     previewImage.style.display = 'block';
+    previewImage.style.transform = 'rotateY(180deg)';
     sendButton.style.display = 'block';
     repetatiButton.style.display = 'block';
 }
