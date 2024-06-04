@@ -1,26 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera Capture</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.983.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Media Grid</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Times New Roman', Times, serif;
+      background: linear-gradient(to bottom right, #bfb1b2, #55070e);
+    }
+
+    .header {
+      text-align: center;
+      padding: 32px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 4px;
+    }
+
+    .column {
+      flex: 50%;
+      max-width: 50%;
+      padding: 0 4px;
+    }
+
+    .column img, .column video {
+      margin-top: 8px;
+      vertical-align: middle;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px) {
+      .column {
+        flex: 50%;
+        max-width: 50%;
+      }
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+    }
+
+    .modal-content, #caption {
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+
+    @keyframes zoom {
+      from {transform:scale(0)}
+      to {transform:scale(1)}
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Butoanele pentru navigarea imaginilor */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -50px;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+    }
+
+    .prev {
+      left: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    @media only screen and (max-width: 700px){
+      .modal-content {
+        width: 100%;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+      font-family: Arial, sans-serif; /* Schimbă fontul */
+      font-size: 16px; /* Schimbă dimensiunea textului */
+    }
+  </style>
 </head>
 <body>
-    <h1>12 A</h1>
-    <video id="video" autoplay muted></video>
-    <canvas id="canvas" style="display:none;"></canvas>
-    <div id="info"></div>
-    <div id="buttonContainer">
-        <button id="captureButton">Capturează</button>
-        <button id="recordButton">Înregistrează</button>
-        <button id="stopRecordButton" style="display:none;">Stop înregistrare</button>
-        <button id="repetatiButton" style="display:none;">Repetă</button>
-        <button id="sendButton" style="display:none;">Trimite</button>
-    </div>
-    <video id="previewVideo" controls playsinline webkit-playsinline style="display:none;"></video>
-    <img id="previewImage" style="display:none; margin-top: 20px;">
-    <script src="script.js"></script>
+
+<!-- Header -->
+<div class="header">
+  <h1>12A</h1>
+</div>
+
+<!-- Photo Grid -->
+<div class="row"> 
+  <div class="column">
+    <img src="graduare/captured_media_1717484377855.png" alt="Image 1">
+    <img src="graduare/captured_media_1717484414583.png" alt="Image 3">
+    <img src="graduare/captured_media_1717484434168.png" alt="Image 4">
+    <img src="graduare/captured_media_1717484437082.png" alt="Image 5">
+    <img src="graduare/captured_media_1717484471235.png" alt="Image 6">
+    <img src="graduare/captured_media_1717484487301.png" alt="Image 10">
+    <img src="graduare/captured_media_1717484523399.png" alt="Image 11">
+    <img src="graduare/captured_media_1717484527153.png" alt="Image 12">
+    <img src="graduare/captured_media_1717484587011.png" alt="Image 13">
+    <img src="graduare/captured_media_1717484843213.png" alt="Image 14">
+    <img src="graduare/captured_media_1717485117074.png" alt="Image 17">
+    <img src="graduare/captured_media_1717485306252.png" alt="Image 18">
+    <img src="graduare/captured_media_1717486047372.png" alt="Image 19">
+    <img src="graduare/captured_media_1717486048615.png" alt="Image 20">
+    <img src="graduare/captured_media_1717487535490.png" alt="Image 21">
+    <img src="graduare/captured_media_1717497986093.png" alt="Image 22">
+    <img src="graduare/captured_media_1717511752180.png" alt="Image 23">
+    <img src="graduare/captured_media_1717511820836.png" alt="Image 24">
+    <img src="graduare/captured_media_1717523334027.png" alt="Image 51">
+    <img src="graduare/captured_media_1717523313302.png" alt="Image 51">
+  </div>
+  <div class="column">
+    <img src="graduare/captured_media_1717511826946.png" alt="Image 27">
+    <img src="graduare/captured_media_1717511849502.png" alt="Image 28">
+    <video src="graduare/captured_media_1717512015885-2.mp4" controls></video>
+    <img src="graduare/captured_media_1717512282307.png" alt="Image 31">
+    <img src="graduare/captured_media_1717513152042.png" alt="Image 32">
+    <img src="graduare/captured_media_1717514010992.png" alt="Image 36">
+    <img src="graduare/captured_media_1717514036370.png" alt="Image 42">
+    <img src="graduare/captured_media_1717514137846.png" alt="Image 43">
+    <img src="graduare/captured_media_1717514307201.png" alt="Image 44">
+    <video src="graduare/captured_media_1717514450427.mp4" controls></video>
+    <img src="graduare/captured_media_1717514499611.png" alt="Image 47">
+    <img src="graduare/captured_media_1717514531740.png" alt="Image 48">
+    <img src="graduare/captured_media_1717515461220.png" alt="Image 49">
+    <img src="graduare/captured_media_1717517287499.png" alt="Image 51">
+    <img src="graduare/captured_media_1717526954710.png" alt="Image 51">
+    <img src="graduare/captured_media_1717526642898.png" alt="Image 51">
+    <img src="graduare/captured_media_1717526425425.png" alt="Image 51">
+    <img src="graduare/captured_media_1717526306575.png" alt="Image 51">
+    <img src="graduare/captured_media_1717525049365.png" alt="Image 51">
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="img01">
+  <video class="modal-content" id="vid01" controls></video>
+  <div id="caption"></div>
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<script>
+  var modal = document.getElementById("myModal");
+  var images = document.querySelectorAll(".column img");
+  var videos = document.querySelectorAll(".column video");
+  var modalImg = document.getElementById("img01");
+  var modalVid = document
+  var modalVid = document.getElementById("vid01");
+  var captionText = document.getElementById("caption");
+  var currentIndex = 0;
+  var mediaElements = Array.from(images).concat(Array.from(videos));
+
+  images.forEach(function(img, index) {
+    img.onclick = function() {
+      openModal(index, 'img');
+    }
+  });
+
+  videos.forEach(function(video, index) {
+    video.onclick = function() {
+      openModal(index + images.length, 'vid');
+    }
+  });
+
+  function openModal(index, type) {
+    modal.style.display = "block";
+    currentIndex = index;
+    if (type === 'img') {
+      modalImg.src = mediaElements[currentIndex].src;
+      modalImg.style.display = "block";
+      modalVid.style.display = "block";
+      captionText.innerHTML = mediaElements[currentIndex].alt;
+    } else {
+      modalVid.src = mediaElements[currentIndex].src;
+      modalVid.style.display = "block";
+      modalImg.style.display = "block";
+      captionText.innerHTML = "";
+    }
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+    modalImg.src = "";
+    modalVid.src = "";
+  }
+
+  function plusSlides(n) {
+    currentIndex += n;
+    if (currentIndex >= mediaElements.length) {
+      currentIndex = 0;
+    } else if (currentIndex < 0) {
+      currentIndex = mediaElements.length - 1;
+    }
+
+    if (mediaElements[currentIndex].tagName.toLowerCase() === 'img') {
+      modalImg.src = mediaElements[currentIndex].src;
+      modalImg.style.display = "block";
+      modalVid.style.display = "none";
+      captionText.innerHTML = mediaElements[currentIndex].alt;
+    } else {
+      modalVid.src = mediaElements[currentIndex].src;
+      modalVid.style.display = "block";
+      modalImg.style.display = "none";
+      captionText.innerHTML = "";
+    }
+  }
+
+  var span = document.getElementsByClassName("close")[0];
+  span.onclick = closeModal;
+
+</script>
+
+
 </body>
 </html>
