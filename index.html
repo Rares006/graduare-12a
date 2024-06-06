@@ -39,6 +39,17 @@
       cursor: pointer;
     }
 
+    .video-container {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 4px;
+      margin-top: 8px;
+    }
+
+    .video-container video {
+      width: 100%;
+    }
+
     @media screen and (max-width: 600px) {
       .column {
         flex: 50%;
@@ -147,9 +158,14 @@
 <div class="header">
   <h1>12A</h1>
 </div>
-  
-<video src="graduare/Timeline 1.mp4" controls></video>
-  
+
+<!-- Video Preview -->
+<div class="video-container">
+  <video id="videoPreview" controls>
+    <source src="graduare/Timeline 1.mp4" type="video/mp4">
+  </video>
+</div>
+
 <!-- Photo Grid -->
 <div class="row"> 
   <div class="column">
@@ -229,7 +245,6 @@
   var images = document.querySelectorAll(".column img");
   var videos = document.querySelectorAll(".column video");
   var modalImg = document.getElementById("img01");
-  var modalVid = document
   var modalVid = document.getElementById("vid01");
   var captionText = document.getElementById("caption");
   var currentIndex = 0;
@@ -253,12 +268,12 @@
     if (type === 'img') {
       modalImg.src = mediaElements[currentIndex].src;
       modalImg.style.display = "block";
-      modalVid.style.display = "block";
+      modalVid.style.display = "none";
       captionText.innerHTML = mediaElements[currentIndex].alt;
     } else {
       modalVid.src = mediaElements[currentIndex].src;
       modalVid.style.display = "block";
-      modalImg.style.display = "block";
+      modalImg.style.display = "none";
       captionText.innerHTML = "";
     }
   }
